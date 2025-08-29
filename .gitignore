@@ -82,10 +82,6 @@ Desktop.ini
 tmp/
 temp/
 
-# Build outputs
-dist/
-build/
-
 # Jest coverage
 coverage/
 
