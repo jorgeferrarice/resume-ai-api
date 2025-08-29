@@ -6,17 +6,17 @@ This directory contains example implementations for integrating with the Resume 
 
 ### 1. **chat-example.html** - Complete Chat Demo
 A fully functional HTML/CSS/JavaScript demo showcasing:
-- ✅ Real-time chat with Elevatr AI
-- ✅ Conversation management
+- ✅ Real-time chat with Elevatr recruiting AI
+- ✅ Conversation management and candidate assessment
 - ✅ Beautiful responsive UI
 - ✅ Error handling and API status checking
-- ✅ Quick action buttons for common questions
+- ✅ Quick action buttons for candidate evaluation
 - ✅ Easter eggs and keyboard shortcuts
 
 **How to use:**
 1. Start the API server: `npm run dev`
 2. Open `chat-example.html` in your browser
-3. Start chatting with Elevatr!
+3. Start evaluating Jorge as a candidate with Elevatr!
 
 ### 2. **TypeScript Integration Examples**
 Check the main [Frontend Integration Guide](../FRONTEND_INTEGRATION.md) for:
@@ -45,8 +45,8 @@ The HTML example is fully self-contained and can be customized by:
 
 1. **Styling**: Modify the CSS in the `<style>` section
 2. **API URL**: Change `API_BASE_URL` in the JavaScript
-3. **Features**: Add new quick actions or modify the chat interface
-4. **Personality**: Customize Elevatr's welcome message and behavior
+3. **Features**: Add new quick actions for candidate assessment
+4. **Personality**: Customize Elevatr's recruiting personality and behavior
 
 ## 🌐 Framework Examples
 

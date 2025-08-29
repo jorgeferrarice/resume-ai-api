@@ -237,7 +237,7 @@
     <div class="container">
         <div class="header">
             <h1>🤖 Elevatr Chat Demo</h1>
-            <p>Your fun and nerdy AI career assistant</p>
+            <p>Your fun and nerdy AI recruiting assistant</p>
         </div>
 
         <div class="controls">
@@ -251,19 +251,19 @@
 
         <div class="quick-actions" id="quickActions">
             <div style="margin-bottom: 8px; font-weight: 600; color: #4a5568;">Quick questions:</div>
-            <button onclick="sendQuickMessage('Help me improve my resume')">📋 Improve Resume</button>
-            <button onclick="sendQuickMessage('Analyze my technical skills section')">💻 Tech Skills</button>
-            <button onclick="sendQuickMessage('How can I make my experience more impactful?')">🚀 Experience Tips</button>
-            <button onclick="sendQuickMessage('What keywords should I include for a senior developer role?')">🔑 Keywords</button>
+            <button onclick="sendQuickMessage('What can you tell me about Jorge as a candidate?')">🔍 Candidate Overview</button>
+            <button onclick="sendQuickMessage('How do Jorge\'s technical skills align with senior dev roles?')">💻 Tech Assessment</button>
+            <button onclick="sendQuickMessage('What are Jorge\'s strengths for team leadership?')">🚀 Leadership Potential</button>
+            <button onclick="sendQuickMessage('Is Jorge a good cultural fit for a tech startup?')">🎯 Culture Fit</button>
         </div>
 
         <div class="chat-container">
             <div class="messages" id="messages">
                 <div class="message assistant">
                     <div class="role">🤖 Elevatr</div>
-                    <div class="content">Hey there! 👋 I'm Elevatr, your friendly neighborhood career AI! Ready to help you level up your resume and ace that next opportunity? 
+                    <div class="content">Hey there! 👋 I'm Elevatr, your friendly neighborhood recruiting AI! Ready to help you assess candidates and make great hiring decisions? 
 
-What would you like to work on today? I can analyze your resume, help with specific sections, or even match it against a job description. Let's make your resume legendary! 🎮</div>
+I have detailed information about Jorge Ferrari - a senior full-stack developer with 20+ years of experience. What would you like to know about him as a potential candidate? I can assess technical skills, cultural fit, or leadership potential! 🎮</div>
                     <div class="timestamp">Ready to help</div>
                 </div>
             </div>
@@ -271,7 +271,7 @@ What would you like to work on today? I can analyze your resume, help with speci
                 <input 
                     type="text" 
                     id="messageInput" 
-                    placeholder="Ask Elevatr about your resume..."
+                    placeholder="Ask Elevatr about Jorge as a candidate..."
                     maxlength="4000"
                     onkeydown="handleKeyDown(event)"
                 />
@@ -280,7 +280,7 @@ What would you like to work on today? I can analyze your resume, help with speci
         </div>
 
         <div class="usage-info" id="usageInfo">
-            💡 Tip: Ask specific questions for better advice! Example: "How can I improve my React experience section?"
+            💡 Tip: Ask specific questions about Jorge! Example: "How does Jorge's experience with React make him suitable for this role?"
         </div>
     </div>
 
@@ -446,10 +446,10 @@ What would you like to work on today? I can analyze your resume, help with speci
 
         function loadExample() {
             const examples = [
-                "Hi Elevatr! I'm a senior developer with 20+ years experience. Can you help me optimize my resume for modern tech roles?",
-                "I work with PHP, React, Flutter, and AWS. How should I present these skills effectively?",
-                "What's the best way to showcase leadership experience when mentoring junior developers?",
-                "I'm transitioning from PHP to more modern stacks. How should I position this in my resume?"
+                "Hi Elevatr! Tell me about Jorge Ferrari as a potential senior developer candidate.",
+                "How do Jorge's skills in PHP, React, and Flutter position him for a full-stack role?",
+                "What makes Jorge a good candidate for a leadership position?",
+                "How does Jorge's experience transitioning between tech stacks show his adaptability?"
             ];
             
             const randomExample = examples[Math.floor(Math.random() * examples.length)];
@@ -483,20 +483,20 @@ What would you like to work on today? I can analyze your resume, help with speci
             console.log('  Enter: Send message');
             console.log('  Shift+Enter: New line');
             console.log('');
-            console.log('💡 Try asking Elevatr about:');
-            console.log('  - Resume analysis and optimization');
-            console.log('  - Technical skills presentation');
-            console.log('  - Career advice and tips');
-            console.log('  - Job matching and keywords');
+            console.log('💡 Try asking Elevatr about Jorge:');
+            console.log('  - Technical skills and experience');
+            console.log('  - Cultural fit and personality');
+            console.log('  - Leadership and mentoring potential');
+            console.log('  - Role alignment and suitability');
         });
 
         // Add some fun easter eggs
         const easterEggs = [
-            "Tell me about your favorite programming language!",
-            "What's your take on the latest tech trends?",
-            "Any advice for someone learning to code?",
-            "What would you do if you could automate one boring task?",
-            "If programming languages were D&D classes, what would TypeScript be?"
+            "What would Jorge's ideal work environment look like?",
+            "How does Jorge's D&D hobby relate to his problem-solving skills?",
+            "Would Jorge be good for mentoring junior developers?",
+            "How does Jorge's gaming background contribute to his tech skills?",
+            "If Jorge's tech skills were D&D stats, what would be his highest attribute?"
         ];
 
         function triggerEasterEgg() {

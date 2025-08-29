@@ -75,7 +75,7 @@ router.get('/', (_req, res) => {
                     'POST /api/resume/suggestions': 'Get custom AI suggestions'
                 },
                 chat: {
-                    'POST /api/chat': 'Send message to Elevatr AI assistant',
+                    'POST /api/chat': 'Chat with Elevatr recruiting AI about candidates',
                     'GET /api/chat/:conversationId': 'Get conversation history',
                     'DELETE /api/chat/:conversationId': 'Delete conversation',
                     'GET /api/conversations': 'Get all conversations (admin)',

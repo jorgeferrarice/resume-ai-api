@@ -4,7 +4,7 @@
   "description": "AI-powered resume API built with Express.js",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -r src/lib dist/",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "test": "jest",
