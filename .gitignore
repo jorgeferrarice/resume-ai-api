@@ -51,9 +51,6 @@ jspm_packages/
 .env.test.local
 .env.production.local
 
-# TypeScript compiled output
-dist/
-
 # Logs
 logs
 *.log
