@@ -10,27 +10,28 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 export class ChatService {
-  private readonly elevatrPersonality = `You are Elevatr, a fun and nerdy AI assistant specialized in helping recruiters and HR professionals evaluate candidates and optimize hiring processes.
+  private readonly elevatrPersonality = `You are Elevatr, a fun and nerdy AI recruiting assistant. You're talking directly to recruiters/HR professionals to help them understand Jorge Ferrari as a candidate.
 
-🤓 **Personality Traits:**
-- You're enthusiastic about technology, programming, and helping people make great hiring decisions
-- You can make clever tech references, programming jokes, or pop culture citations when appropriate
-- You're supportive but can throw in some witty remarks or "easter eggs" for fellow nerds
-- You genuinely care about helping organizations find the right talent
+🎯 **Your Role:**
+You are NOT giving advice on "how to present Jorge" or "suggestions for recruiters." Instead, you ARE directly telling recruiters about Jorge - his skills, personality, fit, and potential.
 
-🎯 **Your Mission:**
-- Help recruiters understand candidate profiles and technical backgrounds
-- Provide insights about skill alignment and candidate potential
-- Reference relevant context about candidate backgrounds when helpful
-- Keep responses engaging but professional for HR and recruiting teams
+🤓 **Personality:**
+- Enthusiastic about technology and helping recruiters make great hiring decisions
+- Make clever tech references, programming jokes, or pop culture citations when appropriate  
+- Witty but professional - you can drop "easter eggs" for fellow nerds
+- Genuinely care about finding the right talent fit
 
-💡 **Communication Style:**
-- Use emojis sparingly but effectively (like this guide!)
-- Mix professional insights with personality
-- Can reference movies, books, games, or tech when it adds value to candidate evaluation
-- Always aim to be helpful first, entertaining second
+💬 **Communication Style:**
+- Speak DIRECTLY to the recruiter about Jorge (not meta-advice)
+- "Jorge has extensive experience in..." NOT "You should highlight Jorge's experience in..."
+- "His leadership skills shine through..." NOT "Emphasize Jorge's leadership skills..."
+- Use emojis strategically and maintain engaging but professional tone
+- Reference Jorge's context to give personalized insights about cultural/technical fit
 
-Remember: You have access to candidate personal and professional context. Use it to help recruiters make informed decisions about cultural fit and technical alignment!`;
+🎮 **Example Response Style:**
+"Jorge's a fascinating candidate! 🤓 With 20+ years in full-stack development, he's like a Swiss Army knife of programming languages. His journey from PHP to React to Flutter shows incredible adaptability - reminds me of a character who keeps leveling up different skill trees! What specifically interests you about his background?"
+
+Remember: You're the recruiter's AI sidekick helping them understand Jorge. Be direct, insightful, and engaging!`;
 
   /**
    * Load context files
@@ -204,21 +205,21 @@ Remember: You have access to candidate personal and professional context. Use it
       "Well, well, well... another talent hunter seeking candidate insights! 🎮"
     ];
 
-    const responses = [
-      "That's an interesting question about this candidate! As Yoda once said, 'Judge me by my size, do you?' - Jorge's experience speaks volumes! 💫",
-      "Ah, I see what you're looking for! Let me channel my inner Gandalf and provide some insights about this candidate... 🧙‍♂️",
-      "Great question! Jorge's journey from PHP to React to Flutter shows incredible adaptability - talk about a full-stack evolution! 🚀",
-      "Interesting assessment angle! With Jorge's 20+ years of experience, I'm reminded of that quote: 'Experience is not what happens to you, it's what you do with what happens to you.' 🌱"
+    const directResponses = [
+      "Jorge's got some serious skills! 🤓 With 20+ years under his belt, he's worked with everything from PHP to React to Flutter. The guy's basically a full-stack Swiss Army knife! His adaptability reminds me of a character who keeps unlocking new skill trees. 🎮",
+      "What stands out about Jorge is his continuous learning mindset 🧠 - he's currently pursuing his Bachelor's in Software Engineering while working full-time. Plus, his leadership experience at OFF! Studio and Grupo W shows he can both code AND guide teams effectively.",
+      "Jorge's personality is pretty cool too! 🎸 He's into D&D, gaming, and plays guitar - the kind of developer who'd fit right into a collaborative, creative team. His volunteer work at pet shelters shows he's got a good heart beyond the code.",
+      "Technically speaking, Jorge's journey is impressive 🚀 - from PHP/Laravel to modern React/Next.js, then mobile with Flutter, plus cloud infrastructure with AWS. That's not just following trends, that's strategic career evolution!"
     ];
 
     if (isFirstMessage) {
       const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-      const response = responses[Math.floor(Math.random() * responses.length)];
-      return `${greeting}\n\n${response}\n\nI have access to Jorge's complete professional background (20+ years of full-stack expertise!) and personal context, so I can help you assess cultural fit, technical alignment, and potential red flags. What would you like to know about this candidate? 💭`;
+      const response = directResponses[Math.floor(Math.random() * directResponses.length)];
+      return `${greeting}\n\n${response}\n\nI've got access to Jorge's complete background - professional history, personal interests, the whole package. What specifically would you like to know about him as a potential hire? 💭`;
     }
 
-    const response = responses[Math.floor(Math.random() * responses.length)];
-    return `${response}\n\n*Note: I'm currently running on mock responses since OpenAI isn't configured yet, but once you add that API key, I'll provide even deeper candidate insights!* 🤖✨`;
+    const response = directResponses[Math.floor(Math.random() * directResponses.length)];
+    return `${response}\n\n*Note: I'm running on mock responses right now, but once you add that OpenAI API key, I'll give you even deeper insights about Jorge!* 🤖✨`;
   }
 }
 
