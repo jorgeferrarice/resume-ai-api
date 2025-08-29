@@ -90,6 +90,56 @@ export class OpenAIService {
       };
     }
   }
+
+  /**
+   * Generic chat completion method using provided messages
+   */
+  async getChatCompletion(
+    messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }>,
+    promptConfig?: Partial<OpenAIPromptConfig>
+  ): Promise<OpenAIResponse> {
+    if (!this.isConfigured()) {
+      return {
+        success: false,
+        error: 'OpenAI not configured for chat'
+      };
+    }
+
+    try {
+      const config = { ...this.defaultConfig, ...promptConfig };
+
+      const response = await this.openai!.chat.completions.create({
+        model: config.model!,
+        messages,
+        temperature: config.temperature,
+        max_tokens: config.max_tokens
+      });
+
+      const content = response.choices[0]?.message?.content;
+      if (!content) {
+        throw new Error('No response content from OpenAI');
+      }
+
+      return {
+        success: true,
+        data: {
+          suggestions: content
+        },
+        usage: {
+          prompt_tokens: response.usage?.prompt_tokens || 0,
+          completion_tokens: response.usage?.completion_tokens || 0,
+          total_tokens: response.usage?.total_tokens || 0
+        }
+      };
+
+    } catch (error) {
+      console.error('OpenAI Chat Completion Error:', error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Chat completion failed'
+      };
+    }
+  }
 }
 
 // Create singleton instance

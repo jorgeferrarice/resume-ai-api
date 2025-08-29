@@ -121,18 +121,21 @@ Remember: You're Jorge's AI advocate talking to a recruiter, not a coaching AI g
       // Add user message to conversation
       conversationService.addMessage(conversation.id, 'user', request.message);
 
-      // Get conversation history for OpenAI
-      const messageHistory = conversationService.getMessageHistory(conversation.id);
+      // Prepare messages for OpenAI: include system + prior conversation + current user
+      const history = conversationService.getMessageHistory(conversation.id);
+      const messages = history.map(m => ({ role: m.role, content: m.content })) as Array<{ role: 'system' | 'user' | 'assistant'; content: string }>;
 
-      // Call OpenAI
-      const aiResponse = await openaiService.getCustomSuggestions(
-        JSON.stringify(messageHistory),
-        'You are Elevatr talking DIRECTLY to a recruiter about Jorge Ferrari. Do NOT give advice on "how to present" or "what to highlight". Instead, talk directly ABOUT Jorge as if you know him personally. Example: "Jorge is incredibly skilled at..." NOT "You should emphasize Jorge\'s skills...". Be conversational and direct.',
-        {
-          temperature: request.temperature || 0.8, // Slightly more creative for personality
-          max_tokens: request.maxTokens || 1000
-        }
-      );
+      // Reinforce instruction to avoid meta-advice
+      messages.unshift({
+        role: 'system',
+        content: 'Critical instruction: You are Elevatr talking DIRECTLY to a recruiter about Jorge Ferrari. Never give meta-advice like "you should highlight" or "emphasize". Speak directly ABOUT Jorge.'
+      });
+
+      // Call OpenAI chat completion
+      const aiResponse = await openaiService.getChatCompletion(messages, {
+        temperature: request.temperature || 0.7,
+        max_tokens: request.maxTokens || 800
+      });
 
       if (!aiResponse.success || !aiResponse.data) {
         return {
@@ -143,6 +146,26 @@ Remember: You're Jorge's AI advocate talking to a recruiter, not a coaching AI g
 
       // Extract the assistant's response
       let assistantResponse = aiResponse.data.suggestions;
+      // Guardrail: if the model slips into meta-advice, rewrite instructionally
+      const metaPatterns = [
+        /you should\s/i,
+        /highlight\s/i,
+        /emphasize\s/i,
+        /you can\smention/i,
+        /suggestions?\sfor\s(the\s)?recruiter/i,
+        /as\sElevatr,\s?you\scan/i
+      ];
+      if (assistantResponse && metaPatterns.some(rx => rx.test(assistantResponse))) {
+        assistantResponse = assistantResponse
+          .replace(/As\sElevatr,.*?\n/gi, '')
+          .replace(/(You\s(should|can)\s(mention|highlight|emphasize)[^.!?]*[.!?])/gi, '')
+          .replace(/(Suggestions?\sfor\s(the\s)?recruiter[^.!?]*[.!?])/gi, '')
+          .replace(/(?<=^|\n)When\sdiscussing\sJorge[^\n]*\n/gi, '')
+          .trim();
+        if (!assistantResponse) {
+          assistantResponse = this.getMockElevatrResponse(request.message, conversationService.isFirstUserMessage(conversation.id));
+        }
+      }
       
       // If OpenAI is not configured, provide a fun mock response
       if (!assistantResponse || assistantResponse.includes('OpenAI not configured')) {
